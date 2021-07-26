@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Medidas de similaridad</title>
+    <link rel="stylesheet" href="../css/mini-default.min.css">
+	<link rel="stylesheet" href="../css/style.min.css">
+<!--	
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=UnifrakturMaguntia">
+	<link rel="stylesheet" href="../js/mathscribe/jqmath-0.4.3.css">
+-->
+
+</head>
+<!--<script src='../js/MathJax/MathJax.js?config=default'></script>-->
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=default">
+</script>
+	
+<!--
+	<script src="../js/mathscribe/jquery-1.4.3.min.js"></script>
+	<script src="../js/mathscribe/jqmath-etc-0.4.6.min.js" charset="utf-8"></script>
+-->
+<body>
+
+<div id="root">
+	<header  class="sticky">
+	
+		<label for="drawer-control" class="button drawer-toggle col-sm"></label>
+		<a href="#" class="button logo">Medidas de similaridad</a>
+		<!--<a href="../index.html" class="button">Home</a>-->
+		
+		
+	</header>
+
+	<div class="row" id="doc-wrapper">
+		<input type="checkbox" id="drawer-control" class="drawer" value="on">
+	
+		<nav class="col-md-4 col-lg-3" id="nav-drawer">
+			<div>
+			  <label for="drawer-control" class="drawer-close"></label>
+			  <a href="../index.html">Home</a>
+		  	<a href="#contexto">Contexto</a>
+			<a href="#definiciones">Definiciones</a>
+		  	<a href="#medidas-proximidad">Medidas de proximidad</a>
+		  	<a href="#calc-disimilitud">Cálculo Disimilitud</a>
+		  	<a href="#calc-similitud"">Cálculo Similitud</a>
+			</div>
+		</nav>
+	
+		<main class="col-sm-12 col-md-8 col-lg-9" id="doc-content">
+			<!--***************************-->
+			<!--*******  Contexto  ********-->
+			<!--***************************-->
+			<div id="contexto" class="card fluid">		
+				<h1 class="section double-padded">Contexto</h1>
+
+				<div class="section">
+					<p>Los conceptos de <i>Similaridad</i> y <i>Disimilaridad</i> son conceptos que son utilizados por técnicas de minería de datos, tales como <i>clustering nearest neighbor classification</i> y <i>anomaly detection</i>. El término <mark>Proximidad</mark> es utilizado para referirse a ambos casos.</p>
+				</div>
+			</div>
+			<br>
+		
+			<!--***************************-->
+			<!--*******  Definiciones  ********-->
+			<!--***************************-->
+			<div id="definiciones" class="card fluid">	
+					<h1 class="section double-padded">Definiciones</h2>
+					<div class="section">
+						<p><mark>Similaridad</mark> Es el grado que mide el parecido entre dos objetos. Dado lo anterior, las métricas de similaridad son proporcionales al parecido de los objetos. Numéricamente, son no-negativas. Generalmente están normalizadas en el rango [0, 1]. El valor 0 representado que los objetos son totalmente distintos y el valor 1, totalmente iguales.</p>
+	
+						<p>Sea s(x,y) la similaridad entre los puntos x e y. Entonces se tiene que si los puntos son iguales:</p>
+
+						$$ s(x,y)=1 \Longleftrightarrow x=y$$
+
+						<p>Además, si la medida cumple con:</p>
+						$$ s(x,y)=s(y,x) \quad \forall x,y$$
+						<p>entonces la medida s es <b>simétrica.</b></p>
+	
+						<p><mark>Disimilaridad</mark> Representa el grado en que dos objetos difieren. Numéricamente, son no-negativas. Esta métrica es menor para dos objetos similares. Al igual que las medidas de similaridad, pueden estar normalizadas en el rango [0, 1]. El valor 0 representado que los objetos son totalmente iguales y el valor 1, totalmente distintos. En forma frecuente se encuentra el término <b>distancia</b> como sinónimo para la disimilaridad.</p>
+	
+				</div>
+			</div>
+			<br>
+			<!--****************************************-->
+			<!--*******  Medidas de proximidad  ********-->
+			<!--****************************************-->
+			<div id="medidas-proximidad" class="card fluid">
+				<h1 class="section double-padded">Medidas de proximidad</h1>
+		
+				<div class="section">
+					<p>Las medidas de proximidad, en particular las de similitud, se definen en el intervalo [0, 1]. Si la medida de <b>similitud</b> tiene un rango distinto, por ejemplo s = [s<sub>min</sub>, s<sub>max</sub>], entonces se debe normalizar de la siguiente manera:</p>
+
+					$$ s' = \frac{s-s_{min}}{s_{max} - s_{min}} $$
+
+
+					<p>En forma similar, para normalizar una medida de disimilaridad que tenga un rango d=[d<sub>min</sub>, d<sub>max</sub>] se debe utlizar la fórmula:</p>
+	
+					$$ p' = \frac{p-p_{min}}{p_{max} - p_{min}} $$
+
+
+					<p>Si la medida de proximidad están en el intervalo [0, +&infin;], usualmente se utliza la fórmula de normalización:<p>
+	
+					$$ d' = \frac{d}{1 +  d} $$
+				</div>
+			</div>
+			<br>
+			<!--
+			************************************************************************
+			******   Cálculo de Disimilitud entre objetos
+			************************************************************************	 
+			-->
+			<div id="calc-disimilitud" class="card fluid">
+				<h1 class="section double-padded">Cálculo de Disimilitud entre objetos</h1>
+ 
+				<div class="section">
+					<p>En general, la disimilitud se determina en término de alguna definición de distancia. Las medidas de distantcia que se presentan en esta sección se calculan para dos puntos <i>n</i>-dimensionales definidos como:</p>
+ 
+					 $$ x = \langle x_1, x_2, \dots, x_n \rangle$$
+					 $$ y = \langle y_1, y_2, \dots, y_n \rangle$$
+ 
+					<p>Estos puntos representan dos objetos, cada uno con <i>n</i> características. </p>
+ 
+				</div>
+				 <!--***************************************-->
+				 <!--*******  Distancia Euclideana  ********-->
+				 <!--***************************************-->
+				
+				<div class="section">
+					<h2>Distancia Euclideana</h2>
+ 
+					<p>La distancia Euclideana para estos dos objetos se define como:</p>
+					 $$ d(x,y) = \sqrt{\sum_{k=1}^n (x_k - y_k)^2} $$
+ 				</div>
+ 		
+				 <!--**************************************-->
+				 <!--*******  Distancia Minkowski  ********-->
+				 <!--**************************************-->
+				<div class="section">
+				<h2>Distancia Minkowski</h2>
+ 
+					<p>La distancia <i>r</i>-Minkowski para estos dos objetos se define como:</p>
+
+					 $$ d(x,y) = \left(\sum_{k=1}^n |x_k - y_k|^r \right)^{1/r} $$
+ 
+					<p>, donde <i>r</i> es un parámetro. Se distinguen tres casos:</p>
+ 
+					 <ul>
+					   <li>Caso r=1. También conocido por distancia Manhattan o L1. Un ejemplo de esta distancia es el caso de la <b>distancia Hamming</b>. En Sistemas Digitales, que representa la cantidad de bits que son diferentes entre dos registros.</li>
+					   <li>Caso r=2. Distancia Euclideana.</li>
+					   <li>Caso r=&infin;. Se llaman distancia Suprema o L<sub>max</sub> o norman L<sub>&infin;</sub>. Representa la máxima diferencia entre los atributos de los objetos.</li>
+					 </ul>
+			 	</div>
+ 
+ 			</div>
+			<br>
+			
+			
+ 
+			<!--
+			************************************************************************
+			******   Cálculo de Similitud entre objetos
+			************************************************************************	 
+			-->
+			<div id="calc-similitud" class="card fluid">
+				<h1 class="section double-padded">Cálculo de Similitud entre objetos</h1>
+
+
+				<!--**************************************-->
+				<!--*******  Matriz de confusión  ********-->
+				<!--**************************************-->
+				<div class="section">
+					<h2>Matriz de confusión</h2>
+
+					<p> Esta medida es un ejemplo de medida no-simétrica. Considere un experimento en el que se pide a las personas que clasifiquen un pequeño conjunto de caracteres a medida que parpadean en la pantalla. La matriz de confusión de este experimento registra la frecuencia con la que cada caracter se clasifica en forma correcta y la frecuencia con la que se clasifica como otro caracter. Por ejemplo, suponga que "0" apareció 200 veces y se clasificó como "0" 160 veces, pero como la letra "o" 40 veces. Asimismo, suponga que la letra "o" apareció 200 veces y se clasificó como tal 170 veces y como el número "0" 30 veces.</p>
+
+					<p>Si tomamos estos recuentos como una medida de similitud entre los dos caracteres, entonces tenemos una medida de similitud, pero que no es simétrica.</p>
+
+					$$ s(“0”, “o”) = \frac{40}{2} = 20\% $$
+					$$ s(“o”, “0”) = \frac{30}{2} = 15\% $$
+
+
+					<p>En estas situaciones, la medida de similitud a menudo se hace simétrica estableciendo:</p>
+
+					$$ s’(x,y) = s’(y,x) = \frac{s(x,y)+ (s(y,x)}{2} $$
+
+					$$ \Rightarrow s’(“0”, “o”)= s’(“o”, “0”) = \frac{20+15}{2} = 17.5\% $$
+				</div>
+				<!--***************************************************-->
+				<!--******* Simple Matching Coefficient (SMC)  ********-->
+				<!--***************************************************-->
+				<div class="section">
+				<h2>Simple Matching Coefficient (SMC) </h2>
+
+					<p>Sean x e y dos objetos que tienen n atributos binarios. Se definen las siguientes frecuencias:</p>
+
+					$$f_{00} = \text{el nro. de atributos donde x=0 e y=0} $$
+					$$f_{01} = \text{el nro. de atributos donde x=0 e y=1} $$
+					$$f_{10} = \text{el nro. de atributos donde x=1 e y=0} $$
+					$$f_{11} = \text{el nro. de atributos donde x=1 e y=1} $$
+
+
+					<p>El Simple Matching Coefficient (SMC) se define como:</p>
+
+					$$ SMC=\frac{\text{nros de atributos que son iguales}}{\text{nro total de atributos}}$$
+
+					$$ SMC=\frac{f_{11}+f_{00}}{f_{00}+f_{01}+f_{10}+f_{11}} $$
+				</div>
+				
+				<!--***********************************-->
+				<!--******* Distancia Jaccard  ********-->
+				<!--***********************************-->
+				<div class="section">
+					<h2>Distancia Jaccard</h2>
+
+					<p>El índice de Jaccard ( J ) mide el grado de similitud entre dos conjuntos según la siguiente fórmula:</p>
+
+					$$ \mathcal{J} = \frac{| X \cap Y |}{|X \cup Y|}$$
+
+				</div>
+
+				<!--**********************************-->
+				<!--******* Distancia Coseno  ********-->
+				<!--**********************************-->
+				<div class="section">
+					<h2>Distancia Coseno</h2>
+
+					<p>La similitud de coseno es la medida más común de similitud de documentos. Los documentos a menudo se representan como vectores, en los que cada atributo representa la frecuencia con la que aparece un término (palabra) en particular en el documento.</p>
+
+					<p>Sean dos vectores que representan dos documentos, cada uno con n características:</p>
+
+					$$ \mathbb{x} = \langle x_1, x_2, \dots, x_n \rangle $$
+					$$ \mathbb{y} = \langle y_1, y_2, \dots, y_n \rangle $$
+
+					<p> La distancia coseno se define como:
+
+					$$ cos(\mathbb{x},\mathbb{y}) = \frac{\mathbb{x} \cdot \mathbb{y}}{\|\mathbb{x}\|\|\mathbb{y}\|} $$
+		
+				</div>
+			</div>
+		</main>
+	</div>
+	
+</div>
+
+
+	
+
+
+
+<!--<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. <span class="tooltip" aria-label="Tooltip text">Nunc eu felis imperdiet</span>, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p> -->
+
+<!--
+<blockquote cite="www.quotation.source">Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</blockquote>
+
+<p><mark class="inline-block"><span class="icon-alert inverse"></span>Sed at nisl ut lacus elementum dapibus. Duis tincidunt, est id sollicitudin sollicitudin, leo justo fringilla turpis, a venenatis libero arcu ut nisi. Fusce congue dignissim maximus. Sed ac ante eu arcu lacinia egestas eu a purus.</mark></p>
+
+<a id="seccion2"></a>
+<h1>Sección 2 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+<a id="seccion3"></a>
+<h1>Sección 3 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+-->
+
+</body>
+</html>
