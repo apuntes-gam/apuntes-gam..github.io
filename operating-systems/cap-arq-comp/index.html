@@ -30,7 +30,14 @@
 				<label for="drawer-control" class="drawer-close"></label>
 				<a href="../index.html">Home</a>
 			  	<a href="#tipos-procesadores">Tipos de procesadoress</a>
-				<a href="#definiciones">Definiciones</a>
+				<a class="sublink-1" href="#sub-escalares">Procesadore sub-escalares</a>
+				<a class="sublink-1" href="#escalares">Procesadore escalares</a>
+				<a class="sublink-1" href="#super-escalares">Procesadore súper-escalares</a>
+				<a href="#tecnologias-actuales">Tecnologías actuales</a>
+				<a class="sublink-1" href="#definiciones">Definiciones</a>
+				<a class="sublink-1" href="#sistemas-paralelos">Sistemas Paralelos</a>
+				<a class="sublink-1" href="#arq-mem-paralela">Arquitecturas de memoria paralela</a>
+				<a class="sublink-1" href="#ej-arq-paralela">Ejemplo de arquitectura paralela</a>
 			</div>
 		</nav>
 	
@@ -60,7 +67,7 @@
 					</ul>
 				</div>
 				
-				<div class="section">
+				<div id="sub-escalares" class="section">
 					<h2 class="section double-padded">Procesadores sub-escalares</h2>
 					<p>En los procesadores no segmentados, como el de la siguienta figura, se tiene que en cada ciclo
 					de reloj, se utiliza una sección del procesador, mientras que las otras están inactivas. </p>
@@ -79,7 +86,7 @@
 						por lo que su CPI=5.</p>
 				</div>
 				
-				<div class="section">
+				<div id="escalares" class="section">
 					<h2 class="section double-padded">Procesadores escalares</h2>
 					<p>Debido a que etapa de la instrucción es independiente de la anterior, es posible mejorar el rendimiento
 						del procesador utilizando en forma paralela sus secciones, a través de la técnica de 
@@ -104,7 +111,7 @@
 						
 				</div>
 				
-				<div class="section">
+				<div id="super-escalares" class="section">
 					<h2 class="section double-padded">Procesadores súper-escalares</h2>
 					<p>Para lograr un CPI < 1, es necesario que varias instrucciones estén en la misma etapa en forma 
 						simultánea. Esto se logra con procesadores que tengan replicadas sus rutas de datos, tal como 
@@ -130,44 +137,222 @@
 			</div>
 			
 			<br>
-			<!--*******************************-->
-			<!--*******  Definiciones  ********-->
-			<!--*******************************-->
-			<div id="definiciones" class="card fluid">
-				<h1 class="section double-padded">Deficiones</h1>
-				<div class="section">
-					<h2 class="section double-padded">Physical Procesor (PP)</h2>				
-						<p>Es la implementación en HW de <i>una</i> unidad de procesamiento. Actualmente, 
-							<mark>un core es un PP</mark>.</p>
-				</div>
+			<!--***************************************-->
+			<!--*******  Tecnologías actuales  ********-->
+			<!--***************************************-->
+			<div id="tecnologias-actuales" class="card fluid">
+				<h1 class="section double-padded">Tecnologías actuales</h1>
+					<!--*******************************-->
+					<!--*******  Definiciones  ********-->
+					<!--*******************************-->
+					<div id="definiciones" class="card fluid">
+						<h2 class="section double-padded">Definiciones</h2>
+						<div class="section">
+							<h3 class="section double-padded">Thread (T)</h3>				
+								<p>Es un contexto de ejecución. En términos simples, es una secuencia de instrucciones
+									que puede ser ejecutada en forma concurrente o paralela con otras secuencias de
+									instrucciones.</p>
+						</div>
+				
+						<div class="section">
+							<h3 class="section double-padded">Hardware Thread (HT)</h3>				
+								<p>Es el contexto de ejecución que está implementado en un procesador. Dependiendo del 
+									tipo de procesador, puede tener 1 o más HT.</p>
+						</div>
+				
+						<div class="section">
+							<h3 class="section double-padded">Physical Procesor (PP)</h3>				
+								<p>Es la implementación en HW de <i>una</i> unidad de procesamiento. Actualmente, 
+									<mark>un core es un PP</mark>. Es el encargado de ejecutar un o más HT.</p>
+						</div>
 			
-				<div class="section">
-					<h2 class="section double-padded">Simultaneous Multithreading (SMT) </h2>
-					<p>Tecnología que permite duplicar recursos de un PP, como el conjunto de registros, 
-						PC, mecanismo de interrupciones, etc. Permite la ejecución de instrucciones de múltiples 
-						software threads en un sólo ciclo en un PP. <mark>El procesador debe ser super-escalar 
-						para soportar esta tecnología</mark>.</p>
-
-					<p><mark class="inline-block"><span class="icon-alert inverse"></span>Esto significa que un PP 
-						puede tener múltiples contextos de ejecución.</mark></p>
-				</div>
+						<div class="section">
+							<h3 class="section double-padded">Simultaneous Multithreading (SMT) </h3>
+							<p>Tecnología que permite duplicar recursos de un PP, como el conjunto de registros, 
+								PC, mecanismo de interrupciones, etc. Esto permite a un PP ejecutar múltiples 
+								"contextos de ejecución"
+								en forma <mark>paralela</mark>. Para que esto sea posible, el procesador debe ser
+								<mark>super-escalar</mark>.</p>
+						</div>
 			
-				<div class="section">
-					<h2 class="section double-padded">Logical Procesor</h2>
-					<p>Unidad de procesamiento que mantiene un sólo contexto de ejecución (hardware thread)</p>
-
-					<p>Un LP puede ser un PP (core). Cuando hay SMT, hay tantos LP como capacidad de 
-						ejecución de threads existan.</p>				
-				</div>
+						<div class="section">
+							<h3 class="section double-padded">Logical Procesor (LP)</h3>
+							<p>Unidad de procesamiento que mantiene un sólo HT. Un LP puede ser un PP (core). Cuando hay SMT, 
+								hay tantos LP como capacidad de ejecución de threads existan.</p>				
+						</div>
+					</div>
+					<!--*******************************-->
+					<!--*******  Ejemplo  ********-->
+					<!--*******************************-->
+					<div id="ejemplos" class="card fluid">
+						<h2 class="section double-padded">Ejemplos</h2>
+						<p>Para describir el hardware, Linux posee el comando <kbd class=​"doc">​lscpu​</kbd>​. 
+							Esta sección muestra dos procesadores de la familia Intel i5-9x.</p>
+						<div class="section">		
+							<h3 class="section double-padded">1) Intel Core i5-9400</h3>	
+						
+								<figure align="center">
+								  <img width="80%" src="./img/lscpu-9400.png" alt=""/>
+								  <figcaption>Salida del comando <kbd class=​"doc">​lscpu​</kbd>​</figcaption>
+								</figure>
+								
+								<p>En el texto mostrado, se explican las siguientes líneas:</p>
+								
+								<ul>
+									<li><mark>Socket(s) : 1</mark> Significa que el sistema tiene un sólo chip físico.</li>
+									<li><mark>Core(s) per socket: 6</mark> Implica que el sistema tiene 6 PP.</li>
+									<li><mark>Threads(s) per core: 1</mark> El procesador no tiene SMT.</li>
+									<li><mark>CPU(s) : 6</mark> El sistema tiene 6 LP.</li>
+								</ul>
+						
+						</div>
+						
+						<div class="section">		
+							<h3 class="section double-padded">2) Intel Core i5-9400H</h3>	
+						
+								<figure align="center">
+								  <img width="80%" src="./img/lscpu-9400H.png" alt=""/>
+								  <figcaption>Salida del comando <kbd class=​"doc">​lscpu​</kbd>​</figcaption>
+								</figure>
+								
+								<p>En el texto mostrado, se explican las siguientes líneas:</p>
+								
+								<ul>
+									<li><mark>Socket(s) : 2</mark> Significa que el sistema tiene dos chips físicos.</li>
+									<li><mark>Core(s) per socket: 4</mark> Implica que el sistema tiene 4·2=8 PP.</li>
+									<li><mark>Threads(s) per core: 2</mark> El procesador tiene SMT. Cada core puede
+										tener 2 HT (2 contextos de ejecución)</li>
+									<li><mark>CPU(s) : 16</mark> El sistema tiene 16 LP.</li>
+								</ul>
+						
+						</div>
+					</div>
+					
+					<!--*************************************-->
+					<!--*******  Sistemas Paralelos  ********-->
+					<!--*************************************-->
+					<div id="sistemas-paralelos" class="card fluid">
+					<h2 class="section double-padded">Sistemas Paralelos </h2>
+						<p>Los sistemas paralelos se caracterizan por tener memoria y reloj común. Si bien existen
+							formalmente los sistemas multiprocesador y multicore, actualmente se utilizan
+							 computadores multicore para realizar cómputo paralelo.
+						<!--**********************************-->
+						<!--*******  Multiprocesador  ********-->
+						<!--**********************************-->
+						<h3 class="section double-padded">Sistemas multiprocesador</h3>
+						<div class="section">			
+							<p>Son sistemas que tienen 2 o más procesadores físicos (PP) sin soporte SMT. Estos sistemas
+								eran comunes entre los años 1995 a 2005.</p>
+								
+							<figure align="center">
+							  <img width="60%" src="./img/multi-proc.png" alt=""/>
+							  <figcaption>Arquitectura de los sistemas multiprocesador</figcaption>
+							</figure>
+						</div>
+						
+						<!--****************************-->
+						<!--*******  Multicore  ********-->
+						<!--****************************-->
+						<h3 class="section double-padded">Sistemas multicore</h3>
+						<div class="section">			
+							<p>Son sistemas que tienen 2 o más cores. Los cores pueden o no tener SMT. No hay restricción
+								en el número de sockets que tenga el sistema.</p>
+							<figure align="center">
+							  <img width="60%" src="./img/multi-core.png" alt=""/>
+							  <figcaption>Arquitectura de los sistemas multicore</figcaption>
+							</figure>
+						</div>
+					</div>
+					
+					<!--**************************************************-->
+					<!--*******  Arquitectura de memoria paralela ********-->
+					<!--**************************************************-->
+					<div id="arq-mem-paralela" class="card fluid">
+					<h2 class="section double-padded">Arquitecturas de memoria paralela</h2>
+						
+						<!--**********************************-->
+						<!--*******  UMA  ********-->
+						<!--**********************************-->
+						<h3 class="section double-padded">UMA (Uniform Memory Access)</h3>
+						<div class="section">			
+							<p>La memoria física es compartida por todos los procesadores. Todos los
+								procesadores acceden con el mismo costo temporal a la memoria.</p>
+								
+							<figure align="center">
+							  <img width="40%" src="./img/uma.png" alt=""/>
+							  <figcaption>Uniform Memory Access (UMA)</figcaption>
+							</figure>
+						</div>
+						
+						<!--***********************-->
+						<!--*******  NUMA  ********-->
+						<!--***********************-->
+						<h3 class="section double-padded">NUMA (Non Uniform Memory access</h3>
+						<div class="section">			
+							<p>La memoria física es local a cada procesador. El costo de acceso a la
+								memoria está determinado por el sector donde está el dato.</p>
+							<figure align="center">
+							  <img width="40%" src="./img/numa.png" alt=""/>
+							  <figcaption>Non Unifor Memory Access (NUMA)</figcaption>
+							</figure>
+						</div>
+					</div>
+					
+					<!--**************************************************-->
+					<!--*******  Ejemplo de Arquitectura paralela ********-->
+					<!--**************************************************-->
+					<div id="ej-arq-paralela" class="card fluid">
+					<h2 class="section double-padded">Ejemplo de arquitectura paralela</h2>
+						<div class="section">			
+							<p>Este ejemplo utiliza el comando <kbd class=​"doc">​lscpu​</kbd>​ para 
+								realizar la descripción del hardware y al archivo <kbd class=​"doc">​/proc/meminfo​</kbd>​
+								para determinar la memoria del sistema.</p>
+								
+							<figure align="center">
+							  <img width="60%" src="./img/ej-arq-paralela.png" alt=""/>
+							  <figcaption>Descripción del sistema</figcaption>
+							</figure>
+							
+							<p>Tomando en cuenta <mark>sólo</mark> las 5 primeras líneas, se puede concluir que el sistema
+							tiene dos sockets, cada uno con 4 cores sin SMT, por lo que el sistema tiene 8 LP: </p>
+							
+							<figure align="center">
+							  <img width="60%" src="./img/modelo00.png" alt=""/>
+							  <figcaption>Modelo preliminar, sin tomar la configuración NUMA</figcaption>
+							</figure>
+							
+							<p>Tomando en cuenta la configuración NUMA que muestra el comando 
+								<kbd class=​"doc">​lscpu​</kbd>​, es posible inferir un segundo modelo, donde
+								la configuración NUMA reemplaza los sockets por <mark>nodos NUMA</mark>, 
+								relizando una reordenación de los cores asignados a cada nodo. Esto es una
+								forma sencilla de implementar un balance de carga: cada nuevo thread es asignado 
+								al core sucesivo dentro de un nodo numa.</p>
+								
+								<figure align="center">
+								  <img width="60%" src="./img/modelo01.png" alt=""/>
+								  <figcaption>Modelo preliminar</figcaption>
+								</figure>
+								
+							<p>Debido a que la arquitectura de memoria es NUMA, hay que determinar cómo se reparte
+								la memoria principal en los nodos NUMA. Esto se realiza a través del comando 
+							<kbd class=​"doc">​numactl --hardware</kbd>​</p>
+							
+							<figure align="center">
+							  <img width="60%" src="./img/ej-arq-paralela-02.png" alt=""/>
+							  <figcaption>Configuración de la memoria del sistema</figcaption>
+							</figure>
+							
+							<p>Con esta información, el modelo del sistema queda finalmente como:</p>
+							
+							<figure align="center">
+							  <img width="60%" src="./img/modelo02.png" alt=""/>
+							  <figcaption>Modelo final</figcaption>
+							</figure>
+							
+						</div>
+					</div>
 			</div>
 			<br>
-			
-		
-			
-			
-		
-			
-			
 		</main>
 	</div>
 	

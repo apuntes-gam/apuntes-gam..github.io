@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones al bit</title>
+    <link rel="stylesheet" href="../../css/mini-default.min.css">
+	<link rel="stylesheet" href="../../css/style.min.css">
+</head>
+
+
+<script type="text/javascript"
+   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=default">
+</script>
+	
+
+<body>
+
+<div id="root">
+	<header  class="sticky">
+	
+		<label for="drawer-control" class="button drawer-toggle col-sm"></label>
+		<a href="#" class="button logo">Operaciones al bit</a>
+		<!--<a href="../index.html" class="button">Home</a>-->
+		
+		
+	</header>
+
+	<div class="row" id="doc-wrapper">
+		<input type="checkbox" id="drawer-control" class="drawer" value="on">
+	
+		<nav class="col-md-4 col-lg-3" id="nav-drawer">
+			<div>
+			  	<label for="drawer-control" class="drawer-close"></label>
+			  	<a href="../index.html">Home</a>
+				<a href="#op-mate">Operaciones matemáticos al bit</a>
+		  		<a href="#op-logicas" class="sublink-1">Operaciones lógicas binarias</a>
+				<a href="#shift-bits" class="sublink-1">Corrimiento de bits</a>
+				<a href="#examples" class="sublink-1">Ejemplos</a>
+				<a href="#usos">Usos de las operaciones al bit</a>
+				<a href="#masking" class="sublink-1">Masking</a>
+				<a href="#set-reset" class="sublink-1">Set y Reset de bits</a>
+				<a href="#cambio" class="sublink-1">Cambio de bits</a>
+				<a href="#checksum" class="sublink-1">Cálculo de verificación de integridad</a>
+			</div>
+		</nav>
+	
+		<main class="col-sm-12 col-md-8 col-lg-9" id="doc-content">
+			<div id="op-mate" class="card fluid">		
+				<h1 class="section double-padded">Operadores matemáticos al bit</h1>
+					<!--***************************-->
+					<!--*******  Operaciones lógicas binarios ********-->
+					<!--***************************-->
+					<div id="op-logicas" class="card fluid">		
+						<h2 class="section double-padded">Operadores lógicos binarios</h2>
+
+						<div class="section">
+							<p>Los operadores lógicos a nivel de bit son <code>&</code> (AND), <code>|</code> (OR), 
+								<code>^</code> (XOR) y <code>~</code> (NOT). Las
+								respectivas tablas de verdad se muestran en la siguiente figura:</p>
+						
+							<figure align="center">
+							  <img width="60%" src="./img/operadores-logicos.png" alt=""/>
+							  <figcaption>Tabla de verdad y símbolos utlizados para las operaciones lógicas binarias</figcaption>
+							</figure>
+					
+							<p>Los operadores lógicos a nivel de bit no se deben confundir con los
+								 operadores lógicos <code>&&</code>,
+								 <code>||</code> y <code>!</code>.</p>
+						
+						</div>
+					</div>
+		
+					<!--***************************-->
+					<!--*******  Corrimiento de bits ********-->
+					<!--***************************-->
+					<div id="shift-bits" class="card fluid">	
+						<h2 class="section double-padded">Operadores de corrimiento de bits</h2>
+						<div class="section">
+							<p>Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est.</p>
+
+						
+							<figure align="center">
+							  <img width="40%" src="./img/shift-bits.png" alt=""/>
+							  <figcaption>Símbolos para corrimientos de bits a la izquierda y derecha</figcaption>
+							</figure>
+						
+		 				</div>	
+					</div>
+					
+					<!--**************************-->
+					<!--*******  Ejemplos ********-->
+					<!--**************************-->
+					<div id="examples" class="card fluid">									
+						<h2>Ejemplos</h2>
+						<div class="section">
+<pre>
+int8_t  a =  92;    // 01011100
+int8_t  b = 101;    // 01100101
+int8_t  c = a & b;  // c = 01000100     ==> 68 
+int8_t  d = a | b;  // d = 01111101     ==> 125 
+int8_t  e = a ^ b;  // e = 00111001     ==> 57
+int8_t  f = ~a;     // f = 10100011     ==> -93
+int8_t  g = a >> 4; // g = 00000101     ==> 5
+int16_t h = a << 4; // h = 010111000000 ==> 1472
+</pre>
+						
+						</div>
+					</div>
+			</div>
+			<br>
+			<!--**************************-->
+			<!--*******    USOS   ********-->
+			<!--**************************-->
+			<div id="usos" class="card fluid">		
+				<h1 class="section double-padded">Usos de las operaciones al bit</h1>
+					<p>Para todos los ejemplos de esta sección, se debe considerar las siguientes variables:</p>
+<pre>
+int8_t a; //variable entera de 8 bits
+int8_t b; //variable entera de 8 bits
+a = 93; //es lo mismo que realizar la asignación a = 0b01011101
+	
+</pre>					
+					
+					<div class="card fluid">	
+						<!--*************************-->
+						<!--*******  Masking ********-->
+						<!--*************************-->	
+						<div id="masking"></div>
+						<h2 class="section double-padded">Masking</h2>
+						<div class="section">
+							<p>Una máscara <b>M</b> es secuencia de bits que en conjunto con una operación
+								al bit con otra secuencia de bits <b>N</b>, permite modificar la secuencia
+								N.</p> 
+							<p>Los operadores al bit <code>&</code>, <code><<</code> y <code>>></code>
+								 pueden ser utilizado para seleccionar un conjunto de bits de un número. En 
+								 particular, el operador <code>&</code> es utilizado recordando que 
+								 <code>x & 1 = x</code> y <code>x & 0 = 0</code>. Esto significa que puede
+								 ser utlizado para "filtrar" los bits de la secuencia N.</p>
+													
+						<h3 class="section double-padded">Ejemplo 1</h3>
+							<p>Se necesita accesar a los 3 bits menos significados de la variable <code>a</code> y
+								 almacenarlos en la variable <code>b</code> :</p>
+<pre>
+b = a & 0b00000111;    // 101 ==> 5
+</pre>						
+
+						<h3 class="section double-padded">Ejemplo 2</h3>
+						<p>Se necesita accesar a los bits 2, 3 y 4 de la variable <code>a</code> y 
+							almacenarlos en la variable <code>b</code>:</p>
+<pre>
+b = a & 0b00011100; // 00011100 ==> 28
+b >>= 2;         // 111 ==> 7
+</pre>						
+
+						<h3 class="section double-padded">Ejemplo 3</h3>
+						<p> Se necesita accesar a los bit 4 de la variable <code>a</code> y almacenarlo
+							 en la variable <code>b</code>:</p>
+
+<pre>
+b = ( (a & 0b00010000) >> 4 ) & 1;
+b = (a & (1 << 4)) >> 4; //Es lo mismo
+</pre>								
+							
+							
+						</div>
+						
+						<!--*******************************-->
+						<!--*******  Set and Reset ********-->
+						<!--*******************************-->						
+						<div id="set-reset"></div>
+						<h2 class="section double-padded">Set y Reset de bits</h2>	
+						<div class="section">	
+										
+							<p>El operador <code>|</code> es utilizado para llevar a 1 determinados bits de un número,
+								debido a que <code>x | 1 = 1</code>. 
+								Por otro lado, el operador <code>&</code> es utilizado para llevar a 0 
+								determinados bits de un número, debido a que <code>x & 0 = 0</code>.</p>
+							
+							<h3 class="section double-padded">Ejemplo 1</h3>
+								<p>Se necesita asegurar que los bits 0, 5 y 6 de a sean “1”:</p>
+<pre>
+b = a | 0b01100001;    // b <- 0b01111101 ==> 125
+</pre>						
+							
+							<h3 class="section double-padded">Ejemplo 2</h3>
+								<p>Se necesita asegurar que los bits 0, 5 y 6 de a sean “0”:</p>
+<pre>
+b = a & 0b10011110;    // b <- 0b00011100 ==> 28
+</pre>							
+						</div>
+						
+						<!--********************************-->
+						<!--*******  Cambio de bits ********-->
+						<!--********************************-->
+						<div id="cambio"></div>					
+						<h2 class="section double-padded">Cambio de bits</h2>	
+						<div class="section">				
+							<p>El operador <code>^</code> es utilizado para cambiar el estado de determinados bits de un número. 
+								Esto es, si es 1, lo lo cambia. </p>
+						
+							<h3 class="section double-padded">Ejemplo</h3>
+								<p>Se necesita cambiar los bits 0, 5, 6 y 7 de <code>a</code>:</p>
+<pre>
+b = a ^ 0b11100001;    // b <- 0b10111100 ==> 188
+</pre>							
+						
+						</div>
+						<!--*************************-->
+						<!--******* Checksum ********-->
+						<!--*************************-->
+						<div id="checksum"></div>					
+						<h2 class="section double-padded">Cálculo de verificación de integridad</h2>
+						<div class="section">
+							<p>Es interesante que si al valor de <code>b</code> obtenido se vuelve a operar con
+								el mismo registro, se obtiene el obtiene el valor original de <code>a</code>:</p>
+<pre>
+uint8_t c = b ^ 0b11100001;    // c <- 0b01011101 ==> 93
+</pre>							
+						
+							<p>Lo anterior es una propiedad general del operador XOR: <code> x = (x^y)^y </code>. 
+								Esta propiedad se utiliza en procesos de encriptación y cálculo de verificación
+								de integridad (checksum).</p>
+								
+<pre>
+uint8_t genera_BVerif(uint8_t  *mensaje, int tam)
+{
+	uint8_t chkSum = 0;
+	for(int i = 0; i < tam; i++){
+   		chkSum ^= mensaje[i];
+	}
+	return chkSum;
+}
+</pre>								
+						</div>
+						
+						
+					</div>
+			</div>
+			
+		</main>
+	</div>
+	
+</div>
+
+
+	
+
+
+
+<!--<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. <span class="tooltip" aria-label="Tooltip text">Nunc eu felis imperdiet</span>, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p> -->
+
+<!--
+<blockquote cite="www.quotation.source">Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</blockquote>
+
+<p><mark class="inline-block"><span class="icon-alert inverse"></span>Sed at nisl ut lacus elementum dapibus. Duis tincidunt, est id sollicitudin sollicitudin, leo justo fringilla turpis, a venenatis libero arcu ut nisi. Fusce congue dignissim maximus. Sed ac ante eu arcu lacinia egestas eu a purus.</mark></p>
+
+<a id="seccion2"></a>
+<h1>Sección 2 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+<a id="seccion3"></a>
+<h1>Sección 3 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+-->
+
+</body>
+</html>
