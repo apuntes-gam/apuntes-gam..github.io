@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Conceptos de Arquitectura de Computadores</title>
+    <link rel="stylesheet" href="../../css/mini-default.min.css">
+	<link rel="stylesheet" href="../../css/style.min.css">
+
+</head>
+<body>
+
+<body>
+
+<div id="root">
+	<header  class="sticky">
+	
+		<label for="drawer-control" class="button drawer-toggle col-sm"></label>
+		<a href="#" class="button logo">Conceptos de Arq. de Computadores</a>
+		<!--<a href="../index.html" class="button">Home</a>-->
+		
+		
+	</header>
+
+	<div class="row" id="doc-wrapper">
+		<input type="checkbox" id="drawer-control" class="drawer" value="on">
+	
+		<nav class="col-md-4 col-lg-3" id="nav-drawer">
+			<div>
+				<label for="drawer-control" class="drawer-close"></label>
+				<a href="../index.html">Home</a>
+			  	<a href="#tipos-procesadores">Tipos de procesadoress</a>
+				<a href="#definiciones">Definiciones</a>
+			</div>
+		</nav>
+	
+		<main class="col-sm-12 col-md-8 col-lg-9" id="doc-content">
+			
+			<!--****************************************-->
+			<!--*******  Tipos de procesadores  ********-->
+			<!--****************************************-->
+			<div id="tipos-procesadores" class="card fluid">
+				<h1 class="section double-padded">Tipos de procesadores</h1>
+				<div class="section">
+					<p>Dependendiendo de la cantidad de ciclos por instrucción (<i>CPI</i>), 
+						los procesadores se pueden clasificar en:</p>
+					<ul>
+						<li>Sub-escalares</li>
+						<li>Escalares</li>
+						<li>Super-escalares</li>
+					</ul>
+					
+					Se asume que el ciclo de ejecución de una instrucción está dividida en cinco etapas: 
+					<ul>
+						<li>Instruction Fetch (IF)</li>
+						<li>Instruction Decode (ID)</li>
+						<li>Execution (EX)</li>
+						<li>Memory access (MEM)</li>
+						<li>Write Back (WB)</li>
+					</ul>
+				</div>
+				
+				<div class="section">
+					<h2 class="section double-padded">Procesadores sub-escalares</h2>
+					<p>En los procesadores no segmentados, como el de la siguienta figura, se tiene que en cada ciclo
+					de reloj, se utiliza una sección del procesador, mientras que las otras están inactivas. </p>
+						
+						<figure align="center">
+						  <img width="80%" src="./img/proc-sin-seg.png" alt="Procesador sin segmentación"/>
+						  <figcaption>Procesador sin segmentación</figcaption>
+						</figure>
+						
+						<figure align="center">
+						  <img width="40%" src="./img/secuential.png" alt="Ejecución secuencial de instrucciones"/>
+						  <figcaption>Ejecución secuencial de instrucciones</figcaption>
+						</figure>
+						
+						<p>Esto significa que este tipo de procesador se demora 5 ciclos de reloj en ejecutar una instrucción,
+						por lo que su CPI=5.</p>
+				</div>
+				
+				<div class="section">
+					<h2 class="section double-padded">Procesadores escalares</h2>
+					<p>Debido a que etapa de la instrucción es independiente de la anterior, es posible mejorar el rendimiento
+						del procesador utilizando en forma paralela sus secciones, a través de la técnica de 
+						<i>pipelining</i>.</p>
+					
+					<figure align="center">
+					  <img width="80%" src="./img/proc-con-seg.png" alt="Procesador segmentado"/>
+					  <figcaption>Procesador segmentado</figcaption>
+					</figure>
+					
+					<p>Esta técnica permite que mientras una intrucción esté en la etapa <b>n</b>, la instrucción
+						anterior esté en la etapa <b>n-1</b>. Con esto, se pretende tener utilizadas todas las partes del
+						procesador, tal como se muestra en la figura siguiente:</p>
+						
+					<figure align="center">
+					  <img width="40%" src="./img/pipelining.png" alt="Ejemplo de pipelining"/>
+					  <figcaption>Ejemplo de pipelining</figcaption>
+					</figure>
+					
+					<p>Esto significa que este tipo de procesador, en promedio,  se demora 5 ciclos de reloj en ejecutar
+					 5 instrucciones, por lo que su CPI &cong; 5.</p>
+						
+				</div>
+				
+				<div class="section">
+					<h2 class="section double-padded">Procesadores súper-escalares</h2>
+					<p>Para lograr un CPI < 1, es necesario que varias instrucciones estén en la misma etapa en forma 
+						simultánea. Esto se logra con procesadores que tengan replicadas sus rutas de datos, tal como 
+						se muestra en la siguiente figura:</p>
+						
+					<figure align="center">
+					  <img width="80%" src="./img/proc-super-escalar.png" alt="Procesador super-escalar"/>
+					  <figcaption>Procesador súper-escalar</figcaption>
+					</figure>
+					
+					<p>En la siguiente figura, se muestra en pipelining de un procesador que emite dos instrucciones en
+						forma simultánea.</p>
+					
+					<figure align="center">
+					  <img width="40%" src="./img/super-escalar.png" alt="Instrucción superescalar"/>
+					  <figcaption>Ejemplo de pipelining en procesadores súper-escalares</figcaption>
+					</figure>
+					
+					<p>Esto significa que este tipo de procesador, en promedio,  ejecuta  10 instrucciones por
+						ciclo de reloj,  lo que su CPI &cong; 0.5.</p>
+					
+				</div>
+			</div>
+			
+			<br>
+			<!--*******************************-->
+			<!--*******  Definiciones  ********-->
+			<!--*******************************-->
+			<div id="definiciones" class="card fluid">
+				<h1 class="section double-padded">Deficiones</h1>
+				<div class="section">
+					<h2 class="section double-padded">Physical Procesor (PP)</h2>				
+						<p>Es la implementación en HW de <i>una</i> unidad de procesamiento. Actualmente, 
+							<mark>un core es un PP</mark>.</p>
+				</div>
+			
+				<div class="section">
+					<h2 class="section double-padded">Simultaneous Multithreading (SMT) </h2>
+					<p>Tecnología que permite duplicar recursos de un PP, como el conjunto de registros, 
+						PC, mecanismo de interrupciones, etc. Permite la ejecución de instrucciones de múltiples 
+						software threads en un sólo ciclo en un PP. <mark>El procesador debe ser super-escalar 
+						para soportar esta tecnología</mark>.</p>
+
+					<p><mark class="inline-block"><span class="icon-alert inverse"></span>Esto significa que un PP 
+						puede tener múltiples contextos de ejecución.</mark></p>
+				</div>
+			
+				<div class="section">
+					<h2 class="section double-padded">Logical Procesor</h2>
+					<p>Unidad de procesamiento que mantiene un sólo contexto de ejecución (hardware thread)</p>
+
+					<p>Un LP puede ser un PP (core). Cuando hay SMT, hay tantos LP como capacidad de 
+						ejecución de threads existan.</p>				
+				</div>
+			</div>
+			<br>
+			
+		
+			
+			
+		
+			
+			
+		</main>
+	</div>
+	
+</div>
+
+
+
+
+
+
+
+<!--
+<h2>Heading 2 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. <span class="tooltip" aria-label="Tooltip text">Nunc eu felis imperdiet</span>, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<blockquote cite="www.quotation.source">Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</blockquote>
+
+<p><mark class="inline-block"><span class="icon-alert inverse"></span>Sed at nisl ut lacus elementum dapibus. Duis tincidunt, est id sollicitudin sollicitudin, leo justo fringilla turpis, a venenatis libero arcu ut nisi. Fusce congue dignissim maximus. Sed ac ante eu arcu lacinia egestas eu a purus.</mark></p>
+
+<a id="seccion2"></a>
+<h1>Sección 2 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+<a id="seccion3"></a>
+<h1>Sección 3 <small>Subheading</small></h1>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis non ullamcorper leo. Nunc eu felis imperdiet, luctus sapien ut, pulvinar tortor. In libero libero, pulvinar sed porttitor vel, elementum non justo. Sed ac lorem euismod dui condimentum efficitur nec efficitur lorem. Vivamus vehicula sapien nibh, a imperdiet ipsum auctor a. Sed nisl risus, sollicitudin id justo quis, iaculis blandit erat. Quisque nec accumsan mi, vehicula molestie justo. Donec nec pharetra mi. Praesent eu consequat purus. Integer nec euismod est. In condimentum dictum ipsum, nec malesuada mi porttitor id. Aliquam cursus ultricies arcu. Fusce vulputate bibendum tortor, eu lobortis sapien condimentum nec. Vestibulum malesuada finibus nunc, et convallis dolor varius euismod. Etiam condimentum ultricies felis, eget suscipit diam pretium id.</p>
+
+<p>This is some text with some inline <code>source code</code> and some keyboard <kbd>input</kbd>.</p>
+<pre>function sum(num1, num2){
+  return num1 + num2;
+}</pre>
+
+-->
+</body>
+</html>
