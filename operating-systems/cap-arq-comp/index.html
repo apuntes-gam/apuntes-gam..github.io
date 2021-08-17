@@ -33,6 +33,7 @@
 				<a class="sublink-1" href="#sub-escalares">Procesadore sub-escalares</a>
 				<a class="sublink-1" href="#escalares">Procesadore escalares</a>
 				<a class="sublink-1" href="#super-escalares">Procesadore súper-escalares</a>
+				<a href="#jerarquia-memoria">Jerarquía de memoria</a>
 				<a href="#tecnologias-actuales">Tecnologías actuales</a>
 				<a class="sublink-1" href="#definiciones">Definiciones</a>
 				<a class="sublink-1" href="#sistemas-paralelos">Sistemas Paralelos</a>
@@ -133,6 +134,69 @@
 					<p>Esto significa que este tipo de procesador, en promedio,  ejecuta  10 instrucciones por
 						ciclo de reloj,  lo que su CPI &cong; 0.5.</p>
 					
+				</div>
+			</div>
+			<br>
+			<!--****************************************-->
+			<!--*******  Jerarquía de memoria   ********-->
+			<!--****************************************-->
+			<div id="jerarquia-memoria" class="card fluid">
+				<h1 class="section double-padded">Jerarquía de Memoria</h1>
+				<div class="section">
+					<p>El modelo de procesador revisado en Arquitecutura de Computadores es un ejemplo de máquina digital con memoria.
+						Los componentes principales son dos: un bloque que almacena las instrucciones a ejecutar (memoria de 
+						instrucciones) y un bloque donde almacena los resultados (memoria de datos).</p>
+					<figure align="center">
+					  <img width="60%" src="./img/proc-memory.png" alt=""/>
+					  <figcaption>Bloques de memoria en un modelo de procesador.</figcaption>
+					</figure>
+					
+					<p>La ejecución de cada instrucción comienza obteniendo la instrucción de la memoria principal. 
+						Y, en última instancia, todos los datos procesados por la CPU se cargan o se almacenan en la memoria principal. 
+						Se pueden mantener muy pocos valores de variables de uso frecuente en el sector de registros de la CPU, 
+						pero la mayoría de los programas interesantes manipulan *muchos* más datos de los que puede manejar el
+						 almacenamiento disponible como parte de la ruta de datos de la CPU.</p>
+					
+					<p>De hecho, el rendimiento de la mayoría de los computadores modernos está limitado por el ancho de banda, 
+						es decir, bytes/segundo, de la conexión entre la CPU y la memoria principal, el llamado "cuello 
+						de botella de la memoria". La idea fundamental de establacer un modelo jerárquico de memoria es
+						comprender la naturaleza de esta restricción del rendimiento y entender las mejoras arquitectónicas 
+						que se implementan para mitigar el problema.</p>
+						
+						<figure align="center">
+						  <img width="60%" src="./img/jerarquia-memoria.png" alt=""/>
+						  <figcaption>Tiempo de acceso comparativo entre registros, memoria principal y memoria intermedias (caché) .</figcaption>
+						</figure>
+						
+					<p>Debido a que hay varios órdenes de magnitud de diferencia entre el acceso a los registros del procesador y los 
+						almacenados en memoria principal, es necesario mantener "cerca" del procesador los datos que se utilizan
+						frecuentemente. De esta forma, es posible disminuir el tiempo de acceso a ellos y con esto, disminuir el 
+						tiempo total de ejecución del programa. Conceptualmente, las memorias caché explotan el <i>"Principio de Localidad 
+						de Referencia"</i>, también llamado <i>"Principio de Localidad"</i></p>
+						
+						<blockquote cite="Principio de Localidad de Referencia, William., Stallings (2019). Computer organization and architecture : designing for performance (11th ed.).">Acceder a la dirección de memoria M<sub>0</sub> en un 
+							tiempo t<sub>0</sub> implica que acceder a la dirección de memoria M<sub>0</sub> + &Delta;M en el tiempo
+						t<sub>0</sub> + &Delta;t es más probable cuando &Delta;M  y &Delta;t son cercanos a cero. De este hecho, nacen tres
+						conceptos: <ul>
+							<li> <b>Localidad temporal:</b>  si en un tiempo determinado una posición de memoria particular es referenciada, 
+								entonces es muy probable que la misma ubicación vuelva a ser referenciada en un tiempo posterior cercano.
+							<li> <b>Localidad espacial:</b> si una localización de memoria es referenciada en un tiempo determinado,
+								es probable que las localizaciones cercanas a ella sean también referenciadas en un tiempo posterior cercano. 
+							<li> <b>Localidad secuencial:</b> Las direcciones de memoria que se están utilizando suelen ser contiguas.
+						</ul>
+						</blockquote>
+						
+						
+						
+					<p>Para finalizar, se muestra la jerarquía de memoria en un procesador Xeon, con microarquitectura skylake. Las memorias
+						más cercanas a los procesadores (cores) son más pequeñas pero más rápidas. A medida que se alejan del procesador, 
+						aumentan su tamaño, pero son más lentas (en términos comparativos, también son más baratas de producir).
+						
+						<figure align="center">
+						  <img width="60%" src="./img/jerarquia-memoria-xeon.png" alt=""/>
+						  <figcaption>Tiempo de acceso comparativo entre registros, memoria principal y memoria intermedias (caché) .</figcaption>
+						</figure>
+						
 				</div>
 			</div>
 			
