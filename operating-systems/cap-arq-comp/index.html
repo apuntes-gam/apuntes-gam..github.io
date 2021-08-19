@@ -231,17 +231,40 @@
 						</div>
 			
 						<div class="section">
-							<h3 class="section double-padded">Simultaneous Multithreading (SMT) </h3>
+							<h3 class="section double-padded">Multithreading (MT) </h3>
 							<p>Tecnología que permite duplicar recursos de un PP, como el conjunto de registros, 
 								PC, mecanismo de interrupciones, etc. Esto permite a un PP ejecutar múltiples 
-								"contextos de ejecución"
+								"contextos de ejecución" en un sólo ciclo de reloj
 								en forma <mark>paralela</mark>. Para que esto sea posible, el procesador debe ser
-								<mark>super-escalar</mark>.</p>
+								<mark>super-escalar</mark>. Con esta técnología es posible disminuir el CPI, pero no al mismo nivel 
+								que la ejecución de threads en PP distintos, debido a que los HT deben competir por el acceso
+								a los mismos recursos del PP. Existen varias técnicas para lograr que co-existan varios HT en un
+								mismo PP, entre las cuales están  <i>Simultaneous Multithreading (SMT)</i> e 
+								<i>Interleaved Multithreading (IMT)</i>.</p>
+							
+							<p> En la siguiente figura se muestra la diferencia entre SMT e IMT: mientras que en SMT la
+								ejecución de dos threads pueden estar en el mismo ciclo de reloj, IMT va intercalando
+								la ejecución de distintos threads en ciclos de reloj distinto. Actualmente, Intel y AMD
+								tienen procesadores con MT. La implementación de Intel se llama <i>Hyper-Threading</i>,
+								mientras que AMD mantiene el nombre SMT para su implementación.
+							</p>
+								
+								<figure align="center">
+								  <img width="80%" src="./img/multithreading.png" alt=""/>
+								  <figcaption>Ejemplo de utilización de un procesador escalar.</figcaption>
+								</figure>
+								
+							<p>Tal como se mencionó, existen otras técnicas que cada fabricante implementa para sus procesadores. Por ejemplo,
+								el procesador <a target="_blank" 
+								href="https://www.oracle.com/a/ocom/docs/servers/sparc/sparc-t8-4-ds-3864254.pdf">Sparc  T8-4</a> de Oracle
+								tiene 32 cores y cada core puede ejecutar 8 threads. La tecnología que utiliza es denominada por la empresa como 
+								<i>Dynamic Multithreading</i>.</p>
+								
 						</div>
 			
 						<div class="section">
 							<h3 class="section double-padded">Logical Procesor (LP)</h3>
-							<p>Unidad de procesamiento que mantiene un sólo HT. Un LP puede ser un PP (core). Cuando hay SMT, 
+							<p>Unidad de procesamiento que mantiene un sólo HT. Un LP puede ser un PP (core). Cuando hay MT (SMT, IMP u otra tecnología), 
 								hay tantos LP como capacidad de ejecución de threads existan.</p>				
 						</div>
 					</div>
@@ -265,7 +288,7 @@
 								<ul>
 									<li><mark>Socket(s) : 1</mark> Significa que el sistema tiene un sólo chip físico.</li>
 									<li><mark>Core(s) per socket: 6</mark> Implica que el sistema tiene 6 PP.</li>
-									<li><mark>Threads(s) per core: 1</mark> El procesador no tiene SMT.</li>
+									<li><mark>Threads(s) per core: 1</mark> El procesador no tiene MT.</li>
 									<li><mark>CPU(s) : 6</mark> El sistema tiene 6 LP.</li>
 								</ul>
 						
@@ -284,7 +307,7 @@
 								<ul>
 									<li><mark>Socket(s) : 2</mark> Significa que el sistema tiene dos chips físicos.</li>
 									<li><mark>Core(s) per socket: 4</mark> Implica que el sistema tiene 4·2=8 PP.</li>
-									<li><mark>Threads(s) per core: 2</mark> El procesador tiene SMT. Cada core puede
+									<li><mark>Threads(s) per core: 2</mark> El procesador tiene MT. Cada core puede
 										tener 2 HT (2 contextos de ejecución)</li>
 									<li><mark>CPU(s) : 16</mark> El sistema tiene 16 LP.</li>
 								</ul>
